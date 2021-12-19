@@ -1,7 +1,7 @@
 const mysql = require("promise-mysql");
 
 module.exports = mysql.createConnection({
-    user: 'root',
-    password: 'notSecureChangeMe',
-    database: 'loopback'
+    user: 'loopback',
+    password: 'loopback',
+    database: 'backend_course'
 });
