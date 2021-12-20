@@ -8,18 +8,18 @@ const Tenor = require("tenorjs").client({
 });
 
 module.exports = {
-	data: new SlashCommandBuilder()
-		.setName('server')
-		.setDescription("Replies with server info!")
+    data: new SlashCommandBuilder()
+        .setName('server')
+        .setDescription("Replies with server info!")
         .addStringOption(option =>
             option.setName('thème')
-			.setDescription('le thème du gif')),
+                .setDescription('le thème du gif')),
 
-	async execute(interaction) {
-        Tenor.Search.Random((interaction.options.getString("thème") != undefined? interaction.options.getString("thème"):""), "1").then(Results => {
+    async execute(interaction) {
+        Tenor.Search.Random((interaction.options.getString("thème") != undefined ? interaction.options.getString("thème") : ""), "1").then(Results => {
             Results.forEach(Post => {
                 interaction.reply(Post.url);
-            });         
+            });
         }).catch(console.error);
     },
 };
