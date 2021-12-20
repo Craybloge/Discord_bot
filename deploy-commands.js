@@ -9,7 +9,6 @@ const commands = [
 	new SlashCommandBuilder().setName('server').setDescription('Replies with server info!'),
 	new SlashCommandBuilder().setName('user').setDescription('Replies with user info!'),
 	new SlashCommandBuilder().setName('salut').setDescription('pour dire bonjour!'),
-	new SlashCommandBuilder().setName('exemple').setDescription('avoir un exemple des embed!!!'),
 	new SlashCommandBuilder().setName('ping').setDescription('ping quelqu\'un')	.addUserOption(option =>
 		option.setName('user')
 			.setDescription('the user to ping')
