@@ -1,3 +1,4 @@
+const { MessageEmbed } = require('discord.js');
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const erreurEnvoiMp = new MessageEmbed()
 	.setColor('#FF0000')
