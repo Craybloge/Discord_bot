@@ -28,31 +28,17 @@ client.once('ready', () => {
 
 client.on('interactionCreate', async interaction => {
     if (!interaction.isCommand()) return;
+    
+    const command = client.commands.get(interaction.commandName);
 
-    const { commandName } = interaction;
+	if (!command) return;
 
-    if (commandName === 'ping') {
-        client.users.fetch(interaction.options.getUser("user")["id"]).then(dm => {
-            dm.send({files: ["images\\pong.gif"]}).catch(() => (client.channels.fetch(interaction.channel.id).then(dm => {
-                dm.send({ embeds: [erreurEnvoiMp] })
-            })
-        ));
-        })
-        await interaction.reply(`<@${interaction.options.getUser("user")["id"]}> Pong!`);
-    } else if (commandName === 'server') {
-        await interaction.reply(`Server name: ${interaction.guild.name}\nTotal members: ${interaction.guild.memberCount}`);
-    } else if (commandName === 'user') {
-        await interaction.reply(`Your tag: ${interaction.user.tag}\nYour id: ${interaction.user.id}`);
-    } else if (commandName === 'salut') {
-        await interaction.reply('Salut à tous les amis');
-    }else if (commandName === 'gif') {
-        Tenor.Search.Random((interaction.options.getString("thème") != undefined? interaction.options.getString("thème"):""), "1").then(Results => {
-            Results.forEach(Post => {
-                interaction.reply(Post.url);
-            });         
-        }).catch(console.error);
-    }
-
+	try {
+		await command.execute(interaction);
+	} catch (error) {
+		console.error(error);
+		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+	}
 });
 // Login to Discord with your client's token
 //TODO: faire une option de sondage

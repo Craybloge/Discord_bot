@@ -10,7 +10,11 @@ const Tenor = require("tenorjs").client({
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('server')
-		.setDescription("Replies with server info!"),
+		.setDescription("Replies with server info!")
+        .addStringOption(option =>
+            option.setName('thème')
+			.setDescription('le thème du gif')),
+
 	async execute(interaction) {
         Tenor.Search.Random((interaction.options.getString("thème") != undefined? interaction.options.getString("thème"):""), "1").then(Results => {
             Results.forEach(Post => {
