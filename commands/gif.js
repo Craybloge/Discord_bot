@@ -1,11 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const Tenor = require("tenorjs").client({
-    "Key": "URP4460GCFU0", // https://tenor.com/developer/keyregistration
-    "Filter": "off", // "off", "low", "medium", "high", not case sensitive
-    "Locale": "en_US", // Your locale here, case-sensitivity depends on input
-    "MediaFilter": "minimal", // either minimal or basic, not case sensitive
-    "DateFormat": "D/MM/YYYY - H:mm:ss A" // Change this accordingly
-});
+const { tenorjs } = require('../config.json');
+const Tenor = require("tenorjs").client(tenorjs);
 
 module.exports = {
     data: new SlashCommandBuilder()
