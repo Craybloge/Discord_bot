@@ -3,7 +3,6 @@ const request = require("request");
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { weatherKey } = require('../config.json');
 const { MessageEmbed } = require('discord.js');
-use(bodyParser.urlencoded({ extended: true }))
 const erreur = new MessageEmbed()
     .setColor('#FF0000')
     .setTitle('Erreur')
@@ -27,14 +26,14 @@ module.exports = {
 
             // On return, check the json data fetched
             if (err) {
-                await interaction.reply({ embeds: [erreur] })
+                channel.send({ embeds: [erreur] })
             } else {
                 let weather = JSON.parse(body);
                 // you shall output it in the console just to make sure that the data being displayed is what you want
                 console.log(weather);
 
                 if (weather.main == undefined) {
-                    await interaction.reply({ embeds: [erreur] })
+                    channel.send({ embeds: [erreur] })
                 } else {
                     // we shall use the data got to set up your output
                     let place = `${weather.name}, ${weather.sys.country}`,
@@ -71,7 +70,7 @@ module.exports = {
                             description: weatherDescription
                         }
 
-                        await interaction.reply({ embeds: [forecast] })
+                        channel.send({ embeds: [forecast] })
 
                 }
 
