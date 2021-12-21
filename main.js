@@ -1,6 +1,4 @@
 const { strikethrough } = require('@discordjs/builders');
-const nodemon = require('nodemon');
-
 
 const { Client, Intents, CommandInteraction } = require('discord.js');
 const { token } = require('./config.json');
