@@ -1,5 +1,8 @@
 # Craybot
 Il s'agit d'un bot que j'ai développé d'abord pour le fun et découvrir nodejs et les API. Je compte petit à petit rajouter des fonctionnalités utiles.
+
+N'hésitez pas à me proposer si vous avez des idées / des conseils.  
+Ajoutez moi sur discord: Craybloge#0001
 ## Les commandes fonctionnelles:
 - /gif +thème facultatif
 - /info user
