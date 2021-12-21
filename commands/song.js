@@ -15,12 +15,12 @@ module.exports = {
 						.setRequired(true)))
 		.addSubcommand(subcommand =>
 			subcommand
-				.setName('stop')
-				.setDescription('stop the music'))
+				.setName('skip')
+				.setDescription('skip the current song'))
 		.addSubcommand(subcommand =>
 			subcommand
-				.setName('skip')
-				.setDescription('skip the current song')),
+				.setName('stop')
+				.setDescription('stop the music and clear the queue')),
 
 	async execute(interaction) {
 		if (interaction.options.getSubcommand() === 'play') {
@@ -75,10 +75,25 @@ module.exports = {
 				return message.channel.send(`${song.title} has been added to the queue!`);
 			}
 
-		} else if (interaction.options.getSubcommand() === 'stop') {
-
 		} else if (interaction.options.getSubcommand() === 'skip') {
+			if (!message.member.voice.channel)
+				return message.channel.send(
+					"You have to be in a voice channel to stop the music!"
+				);
+			if (!serverQueue)
+				return message.channel.send("There is no song that I could skip!");
+			serverQueue.connection.dispatcher.end();
+		} else if (interaction.options.getSubcommand() === 'stop') {
+			if (!message.member.voice.channel)
+				return message.channel.send(
+					"You have to be in a voice channel to stop the music!"
+				);
 
+			if (!serverQueue)
+				return message.channel.send("There is no song that I could stop!");
+
+			serverQueue.songs = [];
+			serverQueue.connection.dispatcher.end();
 		}
 
 
