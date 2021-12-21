@@ -9,8 +9,8 @@ const Tenor = require("tenorjs").client({
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('server')
-        .setDescription("Replies with server info!")
+        .setName('gif')
+        .setDescription("Replies with a random Gif")
         .addStringOption(option =>
             option.setName('thème')
                 .setDescription('le thème du gif')),

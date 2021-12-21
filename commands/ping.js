@@ -8,10 +8,14 @@ const erreurEnvoiMp = new MessageEmbed()
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('ping')
-		.setDescription("to Pong someone's dm!"),
+		.setDescription("to Pong someone's dm!")
+		.addUserOption(option =>
+			option.setName('user')
+				.setDescription('the user to ping')
+				.setRequired(true)),
 	async execute(interaction) {
 		client.users.fetch(interaction.options.getUser("user")["id"]).then(dm => {
-			dm.send({ files: ["images\\pong.gif"] }).catch(() => (client.channels.fetch(interaction.channel.id).then(dm => {
+			dm.send({ files: ["..\\images\\pong.gif"] }).catch(() => (client.channels.fetch(interaction.channel.id).then(dm => {
 				dm.send({ embeds: [erreurEnvoiMp] })
 			})
 			));

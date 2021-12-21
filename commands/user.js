@@ -6,7 +6,7 @@ module.exports = {
 		.setDescription("Replies with user info!")
 		.addUserOption(option =>
 			option.setName('user')
-				.setDescription('the user to ping')
+				.setDescription('the user you want info on')
 				.setRequired(true)),
 	async execute(interaction) {
 		await interaction.reply(`Your tag: ${interaction.user.tag}\nYour id: ${interaction.user.id}`);
