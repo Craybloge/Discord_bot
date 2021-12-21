@@ -15,7 +15,19 @@ Il s'agit d'un bot que j'ai développé d'abord pour le fun et découvrir nodejs
 - /meteo + ville + date
 - /lol + des options
 
+---
 
+## la commande weather (en cours):
+
+### reste à implémenter:
+- les subcommand pour choisir now, hourly, daily
+- la durée de la prévision
+- un choix de langue?
+### liens utiles:
+- https://openweathermap.org/api/one-call-api
+- https://www.npmjs.com/package/node-geocoder (pour transformer le nom d'une ville en latitude longitude)
+
+---
 
 ## la commande poll:
 - choix entre 2, 3, 4 et plus si possible options
