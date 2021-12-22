@@ -32,6 +32,12 @@ Ajoutez moi sur discord: Craybloge#0001
 
 ---
 
+## la commande song play/skip/stop
+- tout est à refaire car avec la version 13 de discordjs la gestion des voice channel a complètement changé
+- voir guide ici: https://discordjs.guide/voice/voice-connections.html
+
+---
+
 ## la commande poll:
 - choix entre 2, 3, 4 et plus si possible options
 - on sélectionne l'option en cliquant sur un bouton
