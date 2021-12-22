@@ -23,9 +23,11 @@ module.exports = {
 				.setDescription('stop the music and clear the queue')),
 
 	async execute(interaction) {
+		console.log("/song detected")
 		if (interaction.options.getSubcommand() === 'play') {
 			const url = interaction.options.getString("thème")
 			const voiceChannel = message.member.voice.channel;
+			console.log(url)
 			if (!voiceChannel)
 				return message.channel.send(
 					"You need to be in a voice channel to play music!"

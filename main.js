@@ -4,7 +4,6 @@ const { Client, Collection, Intents, CommandInteraction } = require('discord.js'
 const { token } = require('./config.json');
 
 
-
 // Create a new client instance
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
@@ -12,6 +11,7 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 // Recupération des fichiers js des commandes
 client.commands = new Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
 	// Set a new item in the Collection
