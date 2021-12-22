@@ -5,6 +5,7 @@ module.exports = {
 		.setName('salut')
 		.setDescription("pour dire bonjour!"),
 	async execute(interaction) {
+		console.log("/salut effectué")
         return interaction.reply('Salut à tous les amis');
     },
 };

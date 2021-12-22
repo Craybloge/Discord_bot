@@ -26,14 +26,14 @@ module.exports = {
 
             // On return, check the json data fetched
             if (err) {
-                channel.send({ embeds: [erreur] })
+                interaction.reply({ embeds: [erreur] })
             } else {
                 let weather = JSON.parse(body);
                 // you shall output it in the console just to make sure that the data being displayed is what you want
                 console.log(weather);
 
                 if (weather.main == undefined) {
-                    channel.send({ embeds: [erreur] })
+                    interaction.reply({ embeds: [erreur] })
                 } else {
                     // we shall use the data got to set up your output
                     let place = `${weather.name}, ${weather.sys.country}`,
@@ -70,7 +70,7 @@ module.exports = {
                             description: weatherDescription
                         }
 
-                        channel.send({ embeds: [forecast] })
+                        interaction.reply({ embeds: [forecast] })
 
                 }
 

@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const ytdl = require("ytdl-core");
 
 const queue = new Map();
 module.exports = {
@@ -22,32 +23,32 @@ module.exports = {
 				.setName('stop')
 				.setDescription('stop the music and clear the queue')),
 
-	async execute(interaction) {
-		console.log("/song detected")
+	async execute(interaction, serverQueue) {
 		if (interaction.options.getSubcommand() === 'play') {
-			const url = interaction.options.getString("thème")
-			const voiceChannel = message.member.voice.channel;
-			console.log(url)
+			const url = interaction.options.getString("link")
+			const voiceChannel = interaction.member.voice.channel;
 			if (!voiceChannel)
-				return message.channel.send(
+				return interaction.reply(
 					"You need to be in a voice channel to play music!"
 				);
-			const permissions = voiceChannel.permissionsFor(message.client.user);
+			const permissions = voiceChannel.permissionsFor(interaction.client.user);
 			if (!permissions.has("CONNECT") || !permissions.has("SPEAK")) {
-				return message.channel.send(
+				return interaction.reply(
 					"I need the permissions to join and speak in your voice channel!"
 				);
 			}
+
 			const songInfo = await ytdl.getInfo(url);
 			const song = {
 				title: songInfo.videoDetails.title,
 				url: songInfo.videoDetails.video_url,
 			};
-
+			console.log(songInfo.videoDetails.title)
 			if (!serverQueue) {
 				// Creating the contract for our queue
+				console.log(voiceChannel)
 				const queueContruct = {
-					textChannel: message.channel,
+					textChannel: interaction.channel,
 					voiceChannel: voiceChannel,
 					connection: null,
 					songs: [],
@@ -55,7 +56,7 @@ module.exports = {
 					playing: true,
 				};
 				// Setting the queue using our contract
-				queue.set(message.guild.id, queueContruct);
+				queue.set(interaction.guild.id, queueContruct);
 				// Pushing the song to our songs array
 				queueContruct.songs.push(song);
 
@@ -64,35 +65,35 @@ module.exports = {
 					var connection = await voiceChannel.join();
 					queueContruct.connection = connection;
 					// Calling the play function to start a song
-					play(message.guild, queueContruct.songs[0]);
+					play(interaction.guild, queueContruct.songs[0]);
 				} catch (err) {
-					// Printing the error message if the bot fails to join the voicechat
+					// Printing the error interaction if the bot fails to join the voicechat
 					console.log(err);
-					queue.delete(message.guild.id);
-					return message.channel.send(err);
+					queue.delete(interaction.guild.id);
+					return interaction.reply(err);
 				}
 			} else {
 				serverQueue.songs.push(song);
 				console.log(serverQueue.songs);
-				return message.channel.send(`${song.title} has been added to the queue!`);
+				return interaction.reply(`${song.title} has been added to the queue!`);
 			}
 
 		} else if (interaction.options.getSubcommand() === 'skip') {
-			if (!message.member.voice.channel)
-				return message.channel.send(
+			if (!interaction.member.voice.channel)
+				return interaction.reply(
 					"You have to be in a voice channel to stop the music!"
 				);
 			if (!serverQueue)
-				return message.channel.send("There is no song that I could skip!");
+				return interaction.reply("There is no song that I could skip!");
 			serverQueue.connection.dispatcher.end();
 		} else if (interaction.options.getSubcommand() === 'stop') {
-			if (!message.member.voice.channel)
-				return message.channel.send(
+			if (!interaction.member.voice.channel)
+				return interaction.reply(
 					"You have to be in a voice channel to stop the music!"
 				);
 
 			if (!serverQueue)
-				return message.channel.send("There is no song that I could stop!");
+				return interaction.reply("There is no song that I could stop!");
 
 			serverQueue.songs = [];
 			serverQueue.connection.dispatcher.end();
