@@ -13,13 +13,11 @@ module.exports = {
 			option.setName('user')
 				.setDescription('the user to ping')
 				.setRequired(true)),
-	async execute(client, interaction) {
-		client.users.fetch(interaction.options.getUser("user")["id"]).then(dm => {
-			dm.send({ files: ["..\\images\\pong.gif"] }).catch(() => (client.channels.fetch(interaction.channel.id).then(dm => {
-				dm.send({ embeds: [erreurEnvoiMp] })
-			})
-			));
-		})
+	async execute(interaction, client) {
+		client.users.get(interaction.options.getUser("user")["id"]).send({ files: ["..\\images\\pong.gif"] })
+		.catch(() => (client.channels.get(interaction.channel.id).send({ embeds: [erreurEnvoiMp] })));
+		return .author.send("message").catch(() => {
+			message.channel.send("User has DMs closed or has no mutual servers with the bot:(");
 		await interaction.reply(`<@${interaction.options.getUser("user")["id"]}> Pong!`);
 	},
 };
