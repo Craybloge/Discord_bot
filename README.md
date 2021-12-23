@@ -35,6 +35,7 @@ Ajoutez moi sur discord: Craybloge#0001
 ## la commande song play/skip/stop
 - tout est à refaire car avec la version 13 de discordjs la gestion des voice channel a complètement changé
 - voir guide ici: https://discordjs.guide/voice/voice-connections.html
+- pour lire les vidéos youtube: https://www.npmjs.com/package/ytdl-core
 
 ---
 
