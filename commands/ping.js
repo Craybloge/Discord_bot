@@ -13,7 +13,7 @@ module.exports = {
 			option.setName('user')
 				.setDescription('the user to ping')
 				.setRequired(true)),
-	async execute(interaction) {
+	async execute(client, interaction) {
 		client.users.fetch(interaction.options.getUser("user")["id"]).then(dm => {
 			dm.send({ files: ["..\\images\\pong.gif"] }).catch(() => (client.channels.fetch(interaction.channel.id).then(dm => {
 				dm.send({ embeds: [erreurEnvoiMp] })
