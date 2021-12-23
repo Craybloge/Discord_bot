@@ -34,21 +34,20 @@ module.exports = {
 		if (interaction.options.getSubcommand() === 'play') {
 			const url = interaction.options.getString("link")
 			const voiceChannel = interaction.member.voice.channel;
-			console.log(voiceChannel.id)
 			if (!ytdl.validateURL(url)) {
 				return interaction.reply("L'url n'est pas correcte")
 			}
 			if (!voiceChannel)
-				return interaction.reply(
-					"You need to be in a voice channel to play music!"
+			return interaction.reply(
+				"You need to be in a voice channel to play music!"
 				);
-			const permissions = voiceChannel.permissionsFor(interaction.client.user);
-			if (!permissions.has("CONNECT") || !permissions.has("SPEAK")) {
-				return interaction.reply(
-					"I need the permissions to join and speak in your voice channel!"
-				);
-			}
-
+				const permissions = voiceChannel.permissionsFor(interaction.client.user);
+				if (!permissions.has("CONNECT") || !permissions.has("SPEAK")) {
+					return interaction.reply(
+						"I need the permissions to join and speak in your voice channel!"
+						);
+					}
+					
 			const connection = joinVoiceChannel({
 				channelId: voiceChannel.id,
 				guildId: voiceChannel.guild.id,
@@ -58,8 +57,11 @@ module.exports = {
 			const songInfo = await ytdl.getInfo(url);
 			const song = {
 				title: songInfo.videoDetails.title,
-				author: songInfo.videoDetails.author,
+				author: songInfo.videoDetails.author.name,
 				url: songInfo.videoDetails.video_url,
+				thumbnail: songInfo.videoDetails.thumbnails[0].url,
+				viewcount: songInfo.videoDetails.viewCount,
+				published: songInfo.videoDetails.uploadDate,
 			};
 			const resource = createAudioResource(stream, { inputType: StreamType.Arbitrary });
 			const player = createAudioPlayer();
@@ -67,8 +69,34 @@ module.exports = {
 			connection.subscribe(player);
 
 			player.on(AudioPlayerStatus.Idle, () => connection.destroy());
+			const musique = {
+				color : '#FF0000',
+				name: 'Craybot Radio playing now:',
+				title: song.title,
+				url: url,
+				fields: [
+					{ 
+						name: 'nombre de vue',
+						value: song.viewcount,
+						inline: true,
+					},
+					{ 
+						name: 'published',
+						value: song.published,
+						inline: true,
+					},
+				],
 
-			return interaction.reply(`${song.title} par ${song.author} est jouée maintenant`);
+				image: {
+					url: song.thumbnail
+				},
+				description: song.author
+			}
+
+			return interaction.reply({ embeds: [musique] })
+
+
+			// return interaction.reply(`${song.title} par ${song.author} est jouée maintenant`);
 
 			// if (!serverQueue) {
 			// 	// Creating the contract for our queue
