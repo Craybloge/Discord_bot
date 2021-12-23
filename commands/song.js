@@ -59,7 +59,7 @@ module.exports = {
 				title: songInfo.videoDetails.title,
 				author: songInfo.videoDetails.author.name,
 				url: songInfo.videoDetails.video_url,
-				thumbnail: songInfo.videoDetails.thumbnails[0].url,
+				thumbnail: songInfo.videoDetails.thumbnails[songInfo.videoDetails.thumbnails.length - 1].url,
 				viewcount: songInfo.videoDetails.viewCount,
 				published: songInfo.videoDetails.uploadDate,
 			};
