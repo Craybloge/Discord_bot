@@ -76,8 +76,8 @@ module.exports = {
 				url: url,
 				fields: [
 					{ 
-						name: 'nombre de vue',
-						value: song.viewcount,
+						name: 'nombre de vues',
+						value: Intl.NumberFormat('en', { notation: 'compact' }).format(song.viewcount),
 						inline: true,
 					},
 					{ 
@@ -96,7 +96,6 @@ module.exports = {
 			return interaction.reply({ embeds: [musique] })
 
 
-			// return interaction.reply(`${song.title} par ${song.author} est jouée maintenant`);
 
 			// if (!serverQueue) {
 			// 	// Creating the contract for our queue
