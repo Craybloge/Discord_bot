@@ -5,7 +5,10 @@ const { token } = require('./config.json');
 
 
 // Create a new client instance
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const myIntents = new Intents();
+myIntents.add(Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_VOICE_STATES);
+
+const client = new Client({ intents: myIntents });
 
 
 // récupération des fichiers js des évènements
