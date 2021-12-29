@@ -17,6 +17,7 @@ Ajoutez moi sur discord: Craybloge#0001
 - /poll
 - /meteo + ville + date
 - /lol + des options
+- /recipe avec l'api mealie
 
 ---
 
