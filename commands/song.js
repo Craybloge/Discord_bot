@@ -38,16 +38,16 @@ module.exports = {
 				return interaction.reply("L'url n'est pas correcte")
 			}
 			if (!voiceChannel)
-			return interaction.reply(
-				"You need to be in a voice channel to play music!"
+				return interaction.reply(
+					"You need to be in a voice channel to play music!"
 				);
-				const permissions = voiceChannel.permissionsFor(interaction.client.user);
-				if (!permissions.has("CONNECT") || !permissions.has("SPEAK")) {
-					return interaction.reply(
-						"I need the permissions to join and speak in your voice channel!"
-						);
-					}
-					
+			const permissions = voiceChannel.permissionsFor(interaction.client.user);
+			if (!permissions.has("CONNECT") || !permissions.has("SPEAK")) {
+				return interaction.reply(
+					"I need the permissions to join and speak in your voice channel!"
+				);
+			}
+
 			const connection = joinVoiceChannel({
 				channelId: voiceChannel.id,
 				guildId: voiceChannel.guild.id,
@@ -70,17 +70,17 @@ module.exports = {
 
 			player.on(AudioPlayerStatus.Idle, () => connection.destroy());
 			const musique = {
-				color : '#FF0000',
+				color: '#FF0000',
 				name: 'Craybot Radio playing now:',
 				title: song.title,
 				url: url,
 				fields: [
-					{ 
+					{
 						name: 'nombre de vues',
 						value: Intl.NumberFormat('en', { notation: 'compact' }).format(song.viewcount),
 						inline: true,
 					},
-					{ 
+					{
 						name: 'published',
 						value: song.published,
 						inline: true,

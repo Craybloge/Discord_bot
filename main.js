@@ -6,7 +6,7 @@ const { token } = require('./config.json');
 
 // Create a new client instance
 const myIntents = new Intents();
-myIntents.add(Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_VOICE_STATES);
+myIntents.add(Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_VOICE_STATES, Intents.FLAGS.DIRECT_MESSAGES);
 
 const client = new Client({ intents: myIntents });
 

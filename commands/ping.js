@@ -13,12 +13,15 @@ module.exports = {
 			option.setName('user')
 				.setDescription('the user to ping')
 				.setRequired(true)),
-	async execute(interaction, client) {
-		// client.users.get(interaction.options.getUser("user")["id"]).send({ files: ["..\\images\\pong.gif"] })
-		// .catch(() => (client.channels.get(interaction.channel.id).send({ embeds: [erreurEnvoiMp] })));
+	async execute(client, interaction) {
+		const user = await client.users.fetch(interaction.options.getUser("user")["id"]);
+		user.send({ files: ["..\\images\\pong.gif"] })
+		.catch(() => (client.channels.get(interaction.channel.id).send({ embeds: [erreurEnvoiMp] })));
 		// return .author.send("message").catch(() => {
 		// 	message.channel.send("User has DMs closed or has no mutual servers with the bot:(");
-		// await interaction.reply(`<@${interaction.options.getUser("user")["id"]}> Pong!`);
-		return interaction.reply("Rénovation en cours cette commande ne fonctionne pas")
+		await interaction.reply(`<@${interaction.options.getUser("user")["id"]}> Pong!`);
+		console.log("/ping effectué")
+		// return interaction.reply("Rénovation en cours cette commande ne fonctionne pas")
+
 	},
 };

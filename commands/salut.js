@@ -6,6 +6,6 @@ module.exports = {
 		.setDescription("pour dire bonjour!"),
 	async execute(interaction) {
 		console.log("/salut effectué")
-        return interaction.reply('Salut à tous les amis');
+        return interaction.reply('Joyeuses Fêtes à tous les amis');
     },
 };
