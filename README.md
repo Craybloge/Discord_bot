@@ -10,6 +10,7 @@ Ajoutez moi sur discord: Craybloge#0001
 - /ping + @user
 - /salut
 - /song play, skip, stop
+- /weather + ville
 
 ## les commandes à dev:
 - /poll
