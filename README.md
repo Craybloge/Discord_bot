@@ -9,8 +9,6 @@ Ajoutez moi sur discord: Craybloge#0001
 - /info server
 - /ping + @user
 - /salut
-
-## les commandes à tester:
 - /song play, skip, stop
 
 ## les commandes à dev:
